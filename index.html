@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@^4.0.0/css/materialdesignicons.min.css" rel="stylesheet" type="text/css">
+    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/ionicons@^4.0.0/dist/css/ionicons.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/eva-icons@^1.0.0/style/eva-icons.css" rel="stylesheet" type="text/css">
+    <link href="https://themify.me/wp-content/themes/themify-v32/themify-icons/themify-icons.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@^3.5.2/animate.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/quasar@1.9.8/dist/quasar.rtl.min.css" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      body{
+        background-color: black;
+        background-repeat: no-repeat;
+        align-items: center;
+      }
+      .my-card{
+        width: 100%;
+        max-width: 250px
+      }
+    </style>
+  </head>
+    <!--Navbar-->
+    <div id="q-app">
+        <q-toolbar class="bg-black text-white">
+          <q-btn flat round dense icon="menu">
+          </q-btn>
+          <q-toolbar-title>
+            <q-avatar rounded>
+              <img src="https://pt.seaicons.com/wp-content/uploads/2016/06/Star-Wars-The-Clone-Wars-RH-3-icon.png">
+            </q-avatar>
+            Consumindo Swapi
+          </q-toolbar-title>
+        </q-toolbar>
+    </div>
+
+
+    <!--CARDs-->
+    <div id="app">
+
+
+    <div class="q-pa-md row items-start q-gutter-md">
+
+
+          <q-card dark bordered class="bg-grey-9 my-card" v-for="todo in info">
+            <q-card-section>
+              <div class="text-h6">
+                {{ todo.name }}
+              </div>
+            </q-card-section>
+            <q-separator dark inset></q-separator>
+            <q-card-section>
+              <div class="text-subtitle2">Altura:  {{ todo.height }} </div> 
+              <div class="text-subtitle2">Peso:  {{ todo.mass}} </div> 
+              <div class="text-subtitle2">Cor do cabelo:  {{ todo.hair_color }} </div> 
+              <div class="text-subtitle2">Cor da roupa:  {{ todo.skin_color }} </div> 
+              <div class="text-subtitle2">Nascimento:  {{ todo.birth_year }} </div> 
+              <div class="text-subtitle2">Sexo:  {{ todo.gender }} </div> 
+            </q-card-section>
+          </q-card>
+
+
+    </div>
+
+
+    </div>
+   
+    
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/quasar@1.9.8/dist/quasar.ie.polyfills.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@^2.0.0/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar@1.9.8/dist/quasar.umd.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+     new Vue({
+      el: '#app', 
+      data () {
+        return {
+          info: null
+        }
+      },
+      mounted () {
+        axios
+          .get('https://swapi.co/api/people')
+          .then(response => {
+            this.info = response.data.results;
+            console.log(response.data.results)
+          })
+          .catch(function (error) {
+            console.log(error)
+          }
+        )
+      }
+    })
+    new Vue({
+    el: '#q-app'
+    })
+
+    </script>
+  </body>
+</html>
